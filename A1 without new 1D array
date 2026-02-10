@@ -1,0 +1,58 @@
+//Assignment Task 01: Row Rotation Policy
+class AssgnTask1{
+
+    public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Perform downward rotation examWeek times
+        for(int w = 0; w < examWeek; w++){
+            // Save the last row values in variables (no 1D array)
+            String[] lastRow = matrix[rows-1];
+
+            // Shift rows down
+            for(int i = rows-1; i > 0; i--){
+                matrix[i] = matrix[i-1];
+            }
+
+            // Place last row at the top
+            matrix[0] = lastRow;
+        }
+
+        // Print the rotated matrix
+        for(int i = 0; i < rows; i++){
+            System.out.print("| ");
+            for(int j = 0; j < cols; j++){
+                System.out.print(matrix[i][j] + "  | ");
+            }
+            System.out.println();
+        }
+
+        // Find the row number of "AA" (no break)
+        int rowNumber = -1;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                if(matrix[i][j].equals("AA")){
+                    rowNumber = i+1; // 1-indexed
+                }
+            }
+        }
+
+        return rowNumber;
+    }
+
+    public static void main(String[] args){
+        String[][] seatStatus = {
+                {"A" , "B"  , "C"  , "D"  , "E"},
+                {"F" , "G"  , "H"  , "I"  , "J"},
+                {"K" , "L"  , "M"  , "N"  , "O"},
+                {"P" , "Q"  , "R"  , "S"  , "T"},
+                {"U" , "V"  , "W"  , "X"  , "Y"},
+                {"Z" , "AA" , "BB" , "CC" , "DD"}
+        };
+        Integer examWeek = 3;
+        Integer rowNumber = rowRotation( examWeek, seatStatus );
+        System.out.println("Your friend AA will be on row "+rowNumber);
+    }
+}
