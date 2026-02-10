@@ -1,0 +1,35 @@
+public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+
+    int rows = matrix.length;
+    int cols = matrix[0].length;
+
+    // Perform downward rotation examWeek times
+    for(int w = 0; w < examWeek; w++){
+        String[] temp = matrix[rows-1];
+        for(int i = rows-1; i > 0; i--){
+            matrix[i] = matrix[i-1];
+        }
+        matrix[0] = temp;
+    }
+
+    // Print the rotated matrix
+    for(int i = 0; i < rows; i++){
+        System.out.print("| ");
+        for(int j = 0; j < cols; j++){
+            System.out.print(matrix[i][j] + "  | ");
+        }
+        System.out.println();
+    }
+
+    // Find the row number of "AA" (without break)
+    int rowNumber = -1;
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            if(matrix[i][j].equals("AA")){
+                rowNumber = i+1; // store the row index (1-based)
+            }
+        }
+    }
+
+    return rowNumber;
+}
