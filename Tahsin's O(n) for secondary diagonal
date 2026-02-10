@@ -1,0 +1,13 @@
+public class astro{
+  public static void main(String[] args){
+    int[][] arrq= {{1,2,3},{4,5,6},{7,8,9}};
+    int rows=arrq.length;
+    int cols=arrq[0].length;
+    int sums=0;
+    for(int i=0;i<rows;i++){
+        sums+=arrq[i][cols-1];
+        cols--;
+      }
+    System.out.println(sums);
+  }
+ }
