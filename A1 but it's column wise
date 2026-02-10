@@ -1,0 +1,65 @@
+//Assignment Task 01: Column Rotation Policy
+class AssgnTask1{
+
+    public static Integer columnRotation( Integer examWeek, String[][] matrix ){
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Perform rightward rotation examWeek times
+        for(int w = 0; w < examWeek; w++){
+            // Save the last column
+            String[] lastCol = new String[rows];
+            for(int i = 0; i < rows; i++){
+                lastCol[i] = matrix[i][cols-1];
+            }
+
+            // Shift all columns to the right
+            for(int j = cols-1; j > 0; j--){
+                for(int i = 0; i < rows; i++){
+                    matrix[i][j] = matrix[i][j-1];
+                }
+            }
+
+            // Put last column at the front
+            for(int i = 0; i < rows; i++){
+                matrix[i][0] = lastCol[i];
+            }
+        }
+
+        // Print the rotated matrix
+        for(int i = 0; i < rows; i++){
+            System.out.print("| ");
+            for(int j = 0; j < cols; j++){
+                System.out.print(matrix[i][j] + "  | ");
+            }
+            System.out.println();
+        }
+
+        // Find the column number of "AA" (no break)
+        int colNumber = -1;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                if(matrix[i][j].equals("AA")){
+                    colNumber = j+1; // 1-indexed
+                }
+            }
+        }
+
+        return colNumber;
+    }
+
+    public static void main(String[] args){
+        String[][] seatStatus = {
+                {"A" , "B"  , "C"  , "D"  , "E"},
+                {"F" , "G"  , "H"  , "I"  , "J"},
+                {"K" , "L"  , "M"  , "N"  , "O"},
+                {"P" , "Q"  , "R"  , "S"  , "T"},
+                {"U" , "V"  , "W"  , "X"  , "Y"},
+                {"Z" , "AA" , "BB" , "CC" , "DD"}
+        };
+        Integer examWeek = 3;
+        Integer colNumber = columnRotation( examWeek, seatStatus );
+        System.out.println("Your friend AA will be on column "+colNumber);
+    }
+}
