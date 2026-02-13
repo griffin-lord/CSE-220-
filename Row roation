@@ -1,0 +1,29 @@
+//Assignment Task 01
+    public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+     int rvs = matrix.length;
+     int cvs= matrix[0].length;
+        for(int i=0;i<examWeek; i++){
+         String[] larow= matrix[rvs- 1];
+           for(int k =rvs-1;k>0 ;k--){
+                matrix[i] =matrix[k -1];
+            }
+            matrix[0] =larow;
+        }
+     for(int r=0;r <rvs;r++){
+       System.out.print("| ");
+         for(int c=0;c<cvs;c++){
+                System.out.print(matrix[r][c]+ " | ");
+            }
+            System.out.println();
+        }
+
+        // Find AA's row
+     for(int r = 0;r<rvs; r++){
+       for(int c =0; c<cvs;c++){
+         if(matrix[r][c] =="AA"){
+            return r+1;
+                }
+            }
+        }
+       return 0;
+    }
