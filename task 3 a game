@@ -1,0 +1,31 @@
+
+int rss= arena.length;
+   int css =arena[0].length;
+   int tp= 0;
+
+    for(int mk= 0; mk<rss;mk++){
+     for(int ck= 0;ck<css;ck++){
+       int val= arena[mk][ck];
+         if(val%50==0&& val != 0){
+          if(mk-1>=0 && arena[mk-1][ck] ==2){
+               tp+= 2;
+        }
+         if(mk+1<rss && arena[mk+1][ck]== 2){
+                tp+=2;
+                    }
+           if(ck-1>= 0 &&arena[mk][ck-1]== 2){
+              tp+= 2;
+              }
+              if(ck+1<css && arena[mk][ck+1]== 2){
+                 tp+= 2;
+                }
+            }
+         }
+    }
+        if(tp>= 10){
+            System.out.println("Points Gained: " +tp+ ". Your team has survived the game.");
+        } 
+        else{
+            System.out.println("Points Gained: "+tp+ ". Your team is out.");
+       }
+   }
