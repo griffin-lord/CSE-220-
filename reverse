@@ -1,0 +1,8 @@
+void insertAfter(DNode node, int data) {
+    if (node == null) return;
+    DNode newNode = new DNode(data);
+    newNode.next = node.next;
+    newNode.prev = node;
+    if (node.next != null) node.next.prev = newNode;
+    node.next = newNode;
+}
