@@ -1,0 +1,63 @@
+// NO NEED THIS SUBMIT THIS CLASS
+public class WRM {
+    Patient dh;
+
+    //The constructor is already created for you
+    public WRM() {
+        dh = new Patient(null, null, null, null, null, null);
+        dh.next = dh;
+        dh.prev = dh;
+    }
+
+    public void registerPatient(int id, String name, int age, String bloodgroup) { 
+        Patient newPatient = new Patient(id,name,age, bloodgroup,null, null);
+        Patient last = dh.prev;
+        last.next=newPatient;
+        newPatient.prev=last;
+        newPatient.next=dh;
+        dh.prev=newPatient;
+    }
+
+    public void servePatient() {
+       if(dh.next == dh){
+        System.out.println("No one to cater");
+       }
+    }
+
+    public void showAllPatient() {
+        if (dh.next==dh) {
+            System.out.println("No Patient");
+            return;
+        }
+        Patient temp=dh.next;
+        System.out.println("Serving"+temp);
+        while (temp!=dh) {
+            System.out.println(temp.id+" "+temp.name);
+            temp=temp.next;
+        }
+    }
+
+    public Boolean canDoctorGoHome() {
+        return dh.next==dh;
+    }
+
+    public void cancelAll() {
+        dh.next=dh;
+        dh.prev=dh;
+        System.out.println("All patients camcelled");
+    }
+
+
+    public void reverseTheLine() {
+        Patient curr=dh.next;
+        while(curr!=dh){
+       Patient temp= curr.next;
+        curr.next=curr.prev;
+        curr.prev=temp;
+        curr=temp;
+        }
+        Patient temp=dh.next;
+        dh.next=dh.prev;
+        dh.prev=temp;
+   }
+}
