@@ -1,0 +1,21 @@
+ public ListNode removeElements(ListNode head, int val) {
+        // First, handle the case where head nodes themselves need removal
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+
+        // Now traverse the rest of the list
+        ListNode curr = head;
+        while (curr != null && curr.next != null) {
+            if (curr.next.val == val) {
+                // Skip the node with the target value
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
+            }
+        }
+
+        return head;
+    }
+}
+
