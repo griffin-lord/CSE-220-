@@ -1,0 +1,65 @@
+class SinglyLinkedListNode {
+    int data;
+    SinglyLinkedListNode next;
+
+    SinglyLinkedListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class LinkedListBoilerplate {
+    static SinglyLinkedListNode head = null; // class-level head
+
+    // Insert at tail
+    static void insertNodeAtTail(int data) {
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        SinglyLinkedListNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
+    // Print list
+    static void printList() {
+        SinglyLinkedListNode temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Delete at index
+    static void deleteAt(int idx) {
+        SinglyLinkedListNode temp = head;
+        if(idx==0){
+            head=head.next;
+        }
+        for (int i =1;i<=idx-1; i++) {
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+    }
+    public static void main(String[] args) {
+        // Build list: 10 -> 20 -> 30 -> 40
+        insertNodeAtTail(10);
+        insertNodeAtTail(20);
+        insertNodeAtTail(30);
+        insertNodeAtTail(40);
+
+        System.out.print("Original list: ");
+        printList();  // Output: 10 20 30 40
+
+        // Delete node at index 2 (the "30")
+        deleteAt(0);
+
+        System.out.print("After deletion at index 2: ");
+        printList();  // Output: 10 20 40
+    }
+}
