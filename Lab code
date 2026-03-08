@@ -1,0 +1,25 @@
+public static Node alternateMerge( Node head1, Node head2 ){
+        Node curry1=head1;
+        Node curry2=head2;
+        Node mergedH=curry1;
+        Node tail=mergedH;
+        if(curry1==null || curry2==null){
+            return null;
+        }
+        curry1=curry1.next;
+        while(curry1!=null && curry2!=null) {
+            tail.next = curry2;
+            tail = tail.next;
+            curry2 = curry2.next;
+            tail.next = curry1;
+            tail = tail.next;
+            curry1 = curry1.next;
+        }
+        if (curry1 != null) {
+            tail.next = curry1;
+        }
+        if (curry2 != null) {
+            tail.next = curry2;
+        }
+        return mergedH;
+    }
