@@ -1,0 +1,32 @@
+int top = 0, bottom = arr.length-1;
+int left = 0, right = arr[0].length-1;
+
+while(top <= bottom && left <= right){
+    // [Traverse top row]
+    for(int j=left; j<=right; j++){
+        System.out.print(arr[top][j] + " ");
+    }
+    top++;
+
+    // [Traverse right column]
+    for(int i=top; i<=bottom; i++){
+        System.out.print(arr[i][right] + " ");
+    }
+    right--;
+
+    // [Traverse bottom row]
+    if(top <= bottom){
+        for(int j=right; j>=left; j--){
+            System.out.print(arr[bottom][j] + " ");
+        }
+        bottom--;
+    }
+
+    // [Traverse left column]
+    if(left <= right){
+        for(int i=bottom; i>=top; i--){
+            System.out.print(arr[i][left] + " ");
+        }
+        left++;
+    }
+}
