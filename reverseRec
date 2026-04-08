@@ -1,0 +1,6 @@
+static void reverseRec(Queue<Integer> q){
+    if(q.isEmpty()) return;
+    int x=q.remove();
+    reverseRec(q);
+    q.add(x);
+}
