@@ -1,0 +1,3 @@
+Deque<Integer> dq=new LinkedList<>();
+dq.addFirst(10); dq.addLast(20);
+dq.removeFirst(); dq.removeLast();
