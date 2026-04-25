@@ -1,0 +1,21 @@
+public class Task8 {
+
+    //===================================TASK#8===================================
+    public static void swapChild(BTNode root, int lvl, int M) {
+        if (root == null) {
+            return;
+        }
+
+        // First recurse down, then swap at this level
+        swapChild(root.left, lvl + 1, M);
+        swapChild(root.right, lvl + 1, M);
+
+        // If current level >= M, swap children
+        if (lvl >= M) {
+            BTNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+    }
+    //============================================================================
+}
