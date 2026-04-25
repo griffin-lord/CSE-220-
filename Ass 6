@@ -1,0 +1,22 @@
+///5.1//
+//////////////6/////////
+ public static Integer subtractSummation(BTNode root) {
+        if (root==null) {
+            return null;
+        }
+        //calcusumofltsubtr
+        int ltSum =sbtreS(root.left);
+        //calculate sum of right subtree
+        int rtSum =sbtreS(root.right);
+        //substractrtsumfltsum
+        return ltSum- rtSum;
+    }
+    //helpeeerrrrr
+    private static int sbtreS(BTNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int val =(Integer)node.elem;
+        return val+sbtreS(node.left)+sbtreS(node.right);
+    }
+}
