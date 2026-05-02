@@ -1,0 +1,24 @@
+class Node {
+    int data;
+    Node left, right;
+    Node(int data) { this.data = data; }
+}
+
+class BinaryTree {
+    void inorder(Node root) {
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+}
+
+public class Test1 {
+    public static void main(String[] args) {
+        Node root = new Node(10);
+        root.left = new Node(5);
+        root.right = new Node(15);
+        BinaryTree bt = new BinaryTree();
+        bt.inorder(root); // Output: 5 10 15
+    }
+}
