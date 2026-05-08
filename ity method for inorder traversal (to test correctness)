@@ -1,0 +1,106 @@
+// Definition for a BST Node
+class BSTNode {
+    int key;
+    BSTNode left, right;
+
+    public BSTNode(int item) {
+        key = item;
+        left = right = null;
+    }
+}
+
+public class BSTDeletion {
+
+    // Delete using Inorder Successor
+    public static BSTNode deleteUsingSuccessor(BSTNode node, int key) {
+        if (node == null) return null;
+
+        if (key < node.key) {
+            node.left = deleteUsingSuccessor(node.left, key);
+        } else if (key > node.key) {
+            node.right = deleteUsingSuccessor(node.right, key);
+        } else {
+            // Node with only one child or no child
+            if (node.left == null) return node.right;
+            else if (node.right == null) return node.left;
+
+            // Node with two children: Get inorder successor (smallest in right subtree)
+            BSTNode successor = findMin(node.right);
+            node.key = successor.key;
+            node.right = deleteUsingSuccessor(node.right, successor.key);
+        }
+        return node;
+    }
+
+    // Find minimum value node (leftmost)
+    public static BSTNode findMin(BSTNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    // Delete using Inorder Predecessor
+    public static BSTNode deleteUsingPredecessor(BSTNode node, int key) {
+        if (node == null) return null;
+
+        if (key < node.key) {
+            node.left = deleteUsingPredecessor(node.left, key);
+        } else if (key > node.key) {
+            node.right = deleteUsingPredecessor(node.right, key);
+        } else {
+            // Node with only one child or no child
+            if (node.left == null) return node.right;
+            else if (node.right == null) return node.left;
+
+            // Node with two children: Get inorder predecessor (largest in left subtree)
+            BSTNode predecessor = findMax(node.left);
+            node.key = predecessor.key;
+            node.left = deleteUsingPredecessor(node.left, predecessor.key);
+        }
+        return node;
+    }
+
+    // Find maximum value node (rightmost)
+    public static BSTNode findMax(BSTNode node) {
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    // Utility method for inorder traversal (to test correctness)
+    public static void inorderTraversal(BSTNode root) {
+        if (root != null) {
+            inorderTraversal(root.left);
+            System.out.print(root.key + " ");
+            inorderTraversal(root.right);
+        }
+    }
+
+    // Tester code
+    public static void main(String[] args) {
+        BSTNode root = new BSTNode(50);
+        root.left = new BSTNode(30);
+        root.right = new BSTNode(70);
+        root.left.left = new BSTNode(20);
+        root.left.right = new BSTNode(40);
+        root.right.left = new BSTNode(60);
+        root.right.right = new BSTNode(80);
+
+        System.out.println("Original Tree (Inorder):");
+        inorderTraversal(root);
+        System.out.println();
+
+        // Delete using successor
+        root = deleteUsingSuccessor(root, 50);
+        System.out.println("After deleting 50 using Successor:");
+        inorderTraversal(root);
+        System.out.println();
+
+        // Delete using predecessor
+        root = deleteUsingPredecessor(root, 70);
+        System.out.println("After deleting 70 using Predecessor:");
+        inorderTraversal(root);
+    }
+}
