@@ -1,0 +1,40 @@
+import java.util.*;
+class Solution {
+    static class Node {
+        int val;
+        Node next;
+        Node(int v, Node n) {
+            val = v;
+            next = n;
+        }
+    }
+    public boolean validPath(int n, int[][] edges, int start, int end) {
+        if (start == end) return true;
+        Node[] adj = new Node[n];
+        for (int[] e : edges) {
+            int a = e[0], b = e[1];
+            adj[a] = new Node(b, adj[a]);
+            adj[b] = new Node(a, adj[b]);
+        }
+        boolean[] vis = new boolean[n];
+        vis[start] = true;
+        bfs(start, adj, vis, end);
+        return vis[end];
+    }
+    public void bfs(int start, Node[] adj, boolean[] vis, int end) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+
+        while (!q.isEmpty()) {
+            int front = q.remove();
+            for (Node cur = adj[front]; cur != null; cur = cur.next) {
+                int ele = cur.val;
+                if (!vis[ele]) {
+                    vis[ele] = true;
+                    q.add(ele);
+                    if (ele == end) return;
+                }
+            }
+        }
+    }
+}
